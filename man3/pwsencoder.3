@@ -1,0 +1,57 @@
+.Dd October 23, 2008
+.Dt PWSENCODER 3
+.Os
+.Sh NAME
+.Nm pws_passwords_encode , pws_passwords_encodemulti , pws_passwords_len
+.Nd Functions to encode a password string for storage
+.Sh LIBRARY
+-lpwstor
+.Sh SYNOPSIS
+.In pwstor.h
+.Ft int
+.Fo pws_passwords_encode
+.Fa "char *indata"
+.Fa "char *outdata"
+.Fa "uint8_t use_b64"
+.Fc
+.Ft int
+.Fo pws_passwords_encodemulti
+.Fa "char *indata"
+.Fa "PasswordData *outdata"
+.Fc
+.Ft size_t
+.Fo pws_passwords_len
+.Fa "uint8_t use_b64"
+.Fc
+.Sh DESCRIPTION
+The function 
+.Fn pws_passwords_encode 
+This function returns zero to indicate success, or non-zero to indicate failure.  The size of 
+.Fa outdata 
+should be equal to the return value of 
+.Fn pws_passwords_len 
+with an argument equal to the argument of 
+.Fa use_b64 
+passed to 
+.Fn pws_passwords_encode .  
+That is, the Base64-encoding settings should be the same.  
+.Fa indata 
+must be the password which you wish to encode.  
+This function returns zero to indicate success, or non-zero to indicate failure.  
+.Pp
+The function 
+.Fn pws_passwords_encodemulti 
+works in a similar fashion, except that instead of storing the data in a block of memory, it stores it in a valid PasswordData structure.  This structure must be allocated by the caller.  
+This function returns zero to indicate success, or non-zero to indicate failure.  
+.Pp
+The function 
+.Fn pws_passwords_len 
+returns a value equals to the size required to store a password string.  If 
+.Fa use_b64 
+is true, it returns the amount of space required to store a Base64-encoded password string encoded by libpwstor.  If it is false, it returns the amount of space required to store a libpwstor encoded string which
+is not Base64 encoded.  
+.Sh SEE ALSO
+.Xr pwstor 3 ,
+.Xr pws_passwords_check 3 ,
+.Xr pws_passwords_checkmulti 3 ,
+.Xr pws_passwords_converttomulti 3

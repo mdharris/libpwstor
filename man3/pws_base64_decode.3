@@ -1,0 +1,63 @@
+.Dd October 23, 2008
+.Dt PWS_BASE64_DECODE 3
+.Os
+.Sh NAME
+.Nm pws_base64_encode, pws_base64_decode
+.Nd Encode and decode strings to and from Base64
+.Sh LIBRARY
+-lpwstor
+.Sh SYNOPSIS
+.In pwstor.h
+.Ft unsigned char *
+.Fo pws_base64_encode
+.Fa "unsigned char *src"
+.Fa "unsigned char *dst"
+.Fa "size_t len"
+.Fc
+.Ft unsigned char *
+.Fo pws_base64_decode
+.Fa "unsigned char *src"
+.Fa "unsigned char *dst"
+.Fc
+.Sh DESCRIPTION
+The function 
+.Fn pws_base64_encode
+will encode 
+.Fa len
+bytes of data from the memory referenced by pointer
+.Fa src
+and store that data in the memory referenced by pointer
+.Fa dst .  
+The pointer 
+.Fa dst
+must be at least large enough to hold ((
+.Fa len
+* 2) +1) bytes of data just to be on the safe side.  (While this isn't technically correct, the actual expansion is a fraction, which multiplying by floating point integers may confuse some inexperienced programmers 
+who may then fall victim to buffer overflows.  Experienced developers should know how much memory is necessary and be able to calculate it more appropriately to save a few bytes, but *2 will always work safely.)  The +1 is to allow for
+the storage of a null-terminating byte, since 
+.Fa pws_base64_decode
+expects its Base64-encoded argument to be null-terminated.  Adding the null-terminating byte is up to the application, however the safest thing to do is generally to use 
+.Fn memset
+or 
+.Fn calloc
+so that the memory buffer will be initialized to 0s regardless, and it can simply be propagated by the 
+.Fn pws_base64_encode
+function.  A pointer to the memory buffer referenced by 
+.Fa dst
+is returned.  
+.Pp
+The function 
+.Fn pws_base64_decode
+can be used to decode data stored in memory pointed to by 
+.Fa src
+from Base64 back to its true value.  The true value will be stored in the memory pointed to by
+.Fa dst .
+Since 
+.Fa src
+is Base64 encoded, it is expected to be a null-terminated string.  The 
+.Fa dst
+argument is expected to be a pointer to a memory buffer large enough to store the results of decoding in.  A pointer to the memory buffer referenced by 
+.Fa dst
+is returned.  
+.Sh SEE ALSO
+.Xr pwstor 3

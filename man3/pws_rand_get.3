@@ -1,0 +1,25 @@
+.Dd October 23, 2008
+.Dt PWS_RAND_GET 3
+.Os
+.Sh NAME
+.Nm pws_rand_get
+.Nd Get some bytes of entropy
+.Sh LIBRARY
+-lpwstor
+.Sh SYNOPSIS
+.In pwstor.h
+.Ft int
+.Fo pws_rand_get
+.Fa "size_t bytes"
+.Fa "unsigned char *dst"
+.Fc
+.Sh DESCRIPTION
+The
+.Fn pws_rand_get
+function returns zero on success and non-zero to indicate failure.  Upon success, the 
+.Fa dst 
+buffer (which the caller must allocate appropriately) will be filled with 
+.Fa bytes 
+bytes of entropy from the operating system.  
+.Sh SEE ALSO
+.Xr pwstor 3

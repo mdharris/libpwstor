@@ -1,0 +1,2 @@
+libpwstor is a C password storage library.  It is designed to assist developers in storing passwords securely and creating a standard password storage format
+which can be implemented in libraries across languages to enable interoperability and security.  

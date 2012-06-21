@@ -1,0 +1,55 @@
+.Dd October 23, 2008
+.Dt PWSTOR 3
+.Os
+.Sh NAME
+.Nm libpwstor
+.Nd Password storage library
+.Sh LIBRARY
+-lpwstor
+.Sh SYNOPSIS
+.In pwstor.h
+.Ft uint32_t
+.Fo pws_version_int
+.Fc
+.Ft char *
+.Fo pws_version
+.Fc
+.Sh DESCRIPTION
+The 
+.Fn pws_version_int 
+function returns an integer representing the version of the library which is currently linked to the running program.
+.Pp
+The 
+.Fn pws_version 
+function returns a string pointer containing a human-readable form of the version of the library which is currently linked to the running program.
+.Pp
+Note: These functions cannot fail, and hence have no way to indicate failure.  
+.Sh COPYRIGHT
+libpwstor and all related source code is Copyright (c) 2008 Matt Harris.  All rights reserved.
+.Sh LICENSE
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+.Pp
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+.Pp
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+.Pp
+THIS SOFTWARE IS PROVIDED BY Mr. Harris AND CONTRIBUTORS ``AS IS'' AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED.  IN NO EVENT SHALL Mr. Harris OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGE.
+.Sh SEE ALSO
+.Xr pwtool 1 ,
+.Xr pws_passwords_encode 3 ,
+.Xr pws_passwords_check 3

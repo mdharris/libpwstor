@@ -1,0 +1,65 @@
+.Dd October 23, 2008
+.Dt PWTOOL 1
+.Os
+.Sh NAME
+.Nm pwtool
+.Nd A command-line interface tool to libpwstor
+.Sh SYNOPSIS
+.Nm
+.Op Fl vhb
+.Fl p Ar password
+.Sh DESCRIPTION
+The 
+.Nm 
+command acts as a command-line front-end for the libpwstor (
+.Xr pwstor 3 )
+library.  Currently, the password to encode must be specified on the command line via the 
+.It Fl p Ar password 
+option.  
+Additionally, the following options may be used:
+.Pp
+.Fl v 
+causes 
+.Nm 
+to print the current libpwstor library version and exit.
+.Pp
+.Fl h 
+causes 
+.Nm 
+to print help, similar to the contents of this manual page, and exit.
+.Pp
+.Fl b 
+causes 
+.Nm 
+to print its output in standard format, which will not be human-readable on most terminals.  
+.Pp
+The default behavior of 
+.Nm 
+is to print the output in Base64-encoded format.  
+.Sh COPYRIGHT
+libpwstor and all related source code is Copyright (c) 2008 Matt Harris.  All rights reserved.
+.Sh LICENSE
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+.Pp
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+.Pp
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+.Pp
+THIS SOFTWARE IS PROVIDED BY Mr. Harris AND CONTRIBUTORS ``AS IS'' AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED.  IN NO EVENT SHALL Mr. Harris OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGE.
+.Sh SEE ALSO
+.Xr pwstor 3

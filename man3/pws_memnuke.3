@@ -1,0 +1,38 @@
+.Dd October 23, 2008
+.Dt PWS_STR_MEMNUKE 3
+.Os
+.Sh NAME
+.Nm pws_str_memnuke
+.Nd Over-write the contents of a memory buffer with zeros
+.Sh LIBRARY
+-lpwstor
+.Sh SYNOPSIS
+.In pwstor.h
+.Ft void
+.Fo pws_str_memnuke
+.Fa "volatile void *b"
+.Fa "size_t sz"
+.Fc
+.Sh DESCRIPTION
+The function 
+.Fn pws_str_memnuke
+will over-write 
+.Fa sz
+bytes of memory from the pointer referenced by 
+.Fa b
+with zeros.  This is useful for clearing a memory buffer which contained, for example, a clear-text password.  Calls to 
+.Fn free
+do not zero the memory, so another application could conceivably allocate memory which contains sensitive data from another application.  Calling
+.Fn pws_str_memnuke
+on the buffer prior to calling 
+.Fn free
+on it will prevent this potentially dangerous condition.  
+.Sh CAVEATS
+The 
+.Fn pws_str_memnuke
+function cannot indicate an error, for example if it returns prematurely because a null-pointer was passed to it.  
+It requires that 
+.Fa b
+be cast (volatile) in order to prevent compilers from optimizing it out so that memory is safely wiped.  
+.Sh SEE ALSO
+.Xr pwstor 3

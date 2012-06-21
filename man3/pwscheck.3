@@ -1,0 +1,52 @@
+.Dd October 23, 2008
+.Dt PWSCHECK 3
+.Os
+.Sh NAME
+.Nm pws_passwords_check , pws_passwords_checkmulti
+.Nd Functions to check a given password against an encoded password
+.Sh LIBRARY
+-lpwstor
+.Sh SYNOPSIS
+.In pwstor.h
+.Ft int
+.Fo pws_passwords_check
+.Fa "char *chk"
+.Fa "const char *real"
+.Fa "uint8_t is_b64"
+.Fc
+.Ft int
+.Fo pws_passwords_checkmulti
+.Fa "char *chk"
+.Fa "PasswordData *real"
+.Fc
+.Sh DESCRIPTION
+The function 
+.Fn pws_passwords_check 
+will check a given clear-text password stored in 
+.Fa chk
+against a string encoded by libpwstor which is stored in 
+.Fa real .  
+If 
+.Fa real
+is Base64 encoded, then 
+.Fa is_b64 
+should be set to true.  If not, then 
+.Fa is_b64 
+should be false.  This function will return 0 to indicate a non-match, 1 to indicate that the passwords do indeed match, and <0 to indicate a failure.  In case of failure, 
+.Fa errno
+can be examined to assist in determining what failed.  The EINVAL error indicates that one of the arguments passed to 
+.Fn pws_passwords_check 
+was not in a valid format.  
+.Pp
+The function 
+.Fn pws_passwords_checkmulti 
+returns the same codes as 
+.Fn pws_passwords_check 
+but expects the 
+.Fa real 
+argument to be a pointer to a valid PasswordData structure.  
+.Sh SEE ALSO
+.Xr pwstor 3 ,
+.Xr pws_passwords_encode 3 ,
+.Xr pws_passwords_encodemulti 3 ,
+.Xr pws_passwords_converttomulti 3

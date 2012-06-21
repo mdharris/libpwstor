@@ -1,0 +1,56 @@
+CC=@CC@
+AR=ar
+LN=ln
+INSTALL=/usr/bin/install
+TARGET=@PREFIX@
+#CFLAGS=-O -march=athlon-xp -pipe -I/usr/local/include -I./
+CFLAGS=-O -pipe -I./ @CFLAGS@
+DFLAGS=@DFLAGS@
+LFLAGS=@LDFLAGS@ @LIBS@
+
+SRC=base64.c passwords.c utils.c
+OBJ=${SRC:%.c=%.o}
+ARLIB=libpwstor.a
+SOLIB=libpwstor.so
+
+.c.o:
+	$(CC) $(CFLAGS) $(DFLAGS) -c $<
+
+all:	$(OBJ)
+	$(CC) -shared $(CFLAGS) $(DFLAGS) -o $(SOLIB) $(OBJ)
+	$(AR) rcs $(ARLIB) $(OBJ)
+	$(CC) $(CFLAGS) $(DFLAGS) -o pwtool pwtool.c libpwstor.a $(LFLAGS)
+
+build:	all
+
+install:
+	$(INSTALL) -m 0755 pwtool $(TARGET)/bin/pwtool
+	$(INSTALL) -m 0644 pwstor.h $(TARGET)/include/pwstor.h
+	$(INSTALL) -m 0644 libpwstor.so $(TARGET)/lib/libpwstor.so.0.1
+	$(INSTALL) -m 0644 libpwstor.a $(TARGET)/lib/libpwstor.a
+	$(LN) -fs $(TARGET)/lib/libpwstor.so.0.1 $(TARGET)/lib/libpwstor.so
+	$(INSTALL) -m 0644 man1/pwtool.1 $(TARGET)/man/man1/pwtool.1
+	$(INSTALL) -m 0644 man3/pwstor.3 $(TARGET)/man/man3/pwstor.3
+	$(INSTALL) -m 0644 man3/pwstor.3 $(TARGET)/man/man3/pws_version.3
+	$(INSTALL) -m 0644 man3/pwstor.3 $(TARGET)/man/man3/pws_version_int.3
+	$(INSTALL) -m 0644 man3/pws_rand_get.3 $(TARGET)/man/man3/pws_rand_get.3
+	$(INSTALL) -m 0644 man3/pws_memnuke.3 $(TARGET)/man/man3/pws_memnuke.3
+	$(INSTALL) -m 0644 man3/pws_base64_encode.3 $(TARGET)/man/man3/pws_base64_encode.3
+	$(INSTALL) -m 0644 man3/pws_base64_decode.3 $(TARGET)/man/man3/pws_base64_decode.3
+	$(INSTALL) -m 0644 man3/pwsencoder.3 $(TARGET)/man/man3/pws_passwords_encode.3
+	$(INSTALL) -m 0644 man3/pwsencoder.3 $(TARGET)/man/man3/pws_passwords_encodemulti.3
+	$(INSTALL) -m 0644 man3/pwsencoder.3 $(TARGET)/man/man3/pws_passwords_len.3
+	$(INSTALL) -m 0644 man3/pwscheck.3 $(TARGET)/man/man3/pws_passwords_check.3
+	$(INSTALL) -m 0644 man3/pwscheck.3 $(TARGET)/man/man3/pws_passwords_checkmulti.3
+	$(INSTALL) -m 0644 man3/pws_passwords_converttomulti.3 $(TARGET)/man/man3/pws_passwords_converttomulti.3
+
+clean:
+	rm -f $(OBJ) $(ARLIB) $(SOLIB) pwtool
+
+distclean:	clean
+	rm -f Makefile localconfig.h config.log config.status
+
+
+base64.o:	base64.c pwstor.h pwstor-internal.h
+passwords.o:	passwords.c pwstor.h pwstor-internal.h
+utils.o:	utils.c pwstor.h pwstor-internal.h
