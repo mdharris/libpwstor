@@ -4,7 +4,7 @@ LN=ln
 INSTALL=/usr/bin/install
 TARGET=@PREFIX@
 #CFLAGS=-O -march=athlon-xp -pipe -I/usr/local/include -I./
-CFLAGS=-O -pipe -I./ @CFLAGS@
+CFLAGS=-O -fPIC -pipe -I./ @CFLAGS@
 DFLAGS=@DFLAGS@
 LFLAGS=@LDFLAGS@ @LIBS@
 
